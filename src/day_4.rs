@@ -1,6 +1,3 @@
-use std::fs::File;
-use std::io::{self, BufRead};
-
 struct Board {
   board: Vec<Vec<usize>>,
   won: bool
@@ -33,19 +30,16 @@ impl Board {
   }
 }
 
-pub fn a() -> usize {
-  let file = io::BufReader::new(
-    File::open("./inputs/4.txt").unwrap()
-  );
-  let lines: Vec<String> = file
+pub fn a(input: &str) -> usize {
+  let lines: Vec<String> = input
     .lines()
-    .map(|r| r.unwrap())
     .filter(|s| !s.is_empty())
+    .map(|s|s.to_string())
     .collect();
 
   let draw_numbers: Vec<usize> = lines[0]
     .split_terminator(",")
-    .map(|s| s.parse::<usize>().unwrap())
+    .map(|s| s.parse().unwrap())
     .collect();
 
   let mut boards: Vec<Board> = lines[1..]
@@ -55,7 +49,7 @@ pub fn a() -> usize {
         .map(|row|
           row
             .split_ascii_whitespace()
-            .filter_map(|s| s.parse::<usize>().ok())
+            .filter_map(|s| s.parse().ok())
             .collect()
         ).collect();
       
@@ -73,19 +67,15 @@ pub fn a() -> usize {
   0
 }
 
-pub fn b() -> usize {
-  let file = io::BufReader::new(
-    File::open("./inputs/4.txt").unwrap()
-  );
-  let lines: Vec<String> = file
+pub fn b(input: &str) -> usize {
+  let lines: Vec<&str> = input
     .lines()
-    .map(|r| r.unwrap())
     .filter(|s| !s.is_empty())
     .collect();
 
   let draw_numbers: Vec<usize> = lines[0]
     .split_terminator(",")
-    .map(|s| s.parse::<usize>().unwrap())
+    .map(|s| s.parse().unwrap())
     .collect();
 
   let mut boards: Vec<Board> = lines[1..]
@@ -95,7 +85,7 @@ pub fn b() -> usize {
         .map(|row|
           row
             .split_ascii_whitespace()
-            .filter_map(|s| s.parse::<usize>().ok())
+            .filter_map(|s| s.parse().ok())
             .collect()
         ).collect();
       

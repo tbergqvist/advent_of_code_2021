@@ -10,13 +10,10 @@ fn yolo(data:&mut Vec<i64>, position:usize, add:i64) -> i64 {
   yolo(data, position - 1, prev_value)
 }
 
-pub fn a() -> i64 {
-  let file = io::BufReader::new(
-    File::open("./inputs/6.txt").unwrap()
-  );
-  let line = file
+pub fn a(input: &str) -> i64 {
+  let line = input
     .lines()
-    .next().unwrap().unwrap();
+    .next().unwrap();
   
   let mut data = vec![0; 9];
   line.split_terminator(',')
@@ -32,13 +29,10 @@ pub fn a() -> i64 {
   data.into_iter().sum()
 }
 
-pub fn b() -> i64 {
-  let file = io::BufReader::new(
-    File::open("./inputs/6.txt").unwrap()
-  );
-  let line = file
+pub fn b(input: &str) -> i64 {
+  let line = input
     .lines()
-    .next().unwrap().unwrap();
+    .next().unwrap();
   
   let mut data = vec![0; 9];
   line.split_terminator(',')

@@ -1,7 +1,6 @@
 use std::collections::{HashMap};
-use std::fs::File;
-use std::io::{self, BufRead};
 use std::str::FromStr;
+use std::cmp;
 
 struct Line {
   from: (i32, i32),
@@ -20,7 +19,7 @@ impl FromStr for Line {
         .filter(|c|c.is_digit(10))
         .collect::<String>()
       )
-      .map(|point|point.parse::<i32>().unwrap())
+      .map(|point|point.parse().unwrap())
       .collect();
     
     Ok(Line {
@@ -29,14 +28,10 @@ impl FromStr for Line {
     })
   }
 }
-use std::cmp;
-pub fn a() -> usize {
-  let file = io::BufReader::new(
-    File::open("./inputs/5.txt").unwrap()
-  );
-  let lines: HashMap<(i32, i32), i32> = file
+
+pub fn a(input: &str) -> usize {
+  let lines: HashMap<(i32, i32), i32> = input
     .lines()
-    .map(|r| r.unwrap())
     .map(|s| Line::from_str(&s).unwrap())
     .filter(|line| line.from.0 == line.to.0 || line.from.1 == line.to.1)
     .fold(HashMap::new(), |mut state, line| {
@@ -57,13 +52,9 @@ pub fn a() -> usize {
     .count()
 }
 
-pub fn b() -> usize {
-  let file = io::BufReader::new(
-    File::open("./inputs/5.txt").unwrap()
-  );
-  let lines: HashMap<(i32, i32), i32> = file
+pub fn b(input: &str) -> usize {
+  let lines: HashMap<(i32, i32), i32> = input
     .lines()
-    .map(|r| r.unwrap())
     .map(|s| Line::from_str(&s).unwrap())
     .fold(HashMap::new(), |mut state, line| {
       if line.from.0 == line.to.0 {
