@@ -1,7 +1,7 @@
 use std::fs;
 
 use criterion::{criterion_group, criterion_main, Criterion};
-use advent_of_code_2021::{day_1, day_2, day_3, day_4, day_5, day_6};
+use advent_of_code_2021::*;
 
 pub fn criterion_benchmark(c: &mut Criterion) {
     let input = fs::read_to_string("./inputs/1.txt").unwrap();
@@ -27,6 +27,10 @@ pub fn criterion_benchmark(c: &mut Criterion) {
     let input = fs::read_to_string("./inputs/6.txt").unwrap();
     c.bench_function("day6::a", |b| b.iter(|| day_6::a(&input)));
     c.bench_function("day6::b", |b| b.iter(|| day_6::b(&input)));
+
+    let input = fs::read_to_string("./inputs/7.txt").unwrap();
+    c.bench_function("day7::a", |b| b.iter(|| day_7::a(&input)));
+    c.bench_function("day7::b", |b| b.iter(|| day_7::b(&input)));
 }
 
 criterion_group!(benches, criterion_benchmark);
