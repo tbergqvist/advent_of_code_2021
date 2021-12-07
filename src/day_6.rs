@@ -1,6 +1,3 @@
-use std::fs::File;
-use std::io::{self, BufRead};
-
 fn yolo(data:&mut Vec<i64>, position:usize, add:i64) -> i64 {
   let prev_value = data[position];
   data[position] = add;
