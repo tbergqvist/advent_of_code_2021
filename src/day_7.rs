@@ -9,7 +9,7 @@ pub fn a(input: &str) -> i32 {
     .map(|s| s.parse().unwrap())
     .collect();
     
-  positions.sort();
+  positions.sort_unstable();
   let mid = positions[positions.len() / 2];
   positions.iter().map(|pos| (pos - mid).abs()).sum()
 }
