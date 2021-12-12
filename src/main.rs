@@ -11,6 +11,7 @@ pub mod day_8;
 pub mod day_9;
 pub mod day_10;
 pub mod day_11;
+pub mod day_12;
 
 fn main() {
   println!("Solving");
@@ -57,5 +58,9 @@ fn main() {
   let day11_input = fs::read_to_string("./inputs/11.txt").unwrap();
   println!("11a:{}", day_11::a(&day11_input));
   println!("11b:{}", day_11::b(&day11_input));
+
+  let day12_input = fs::read_to_string("./inputs/12.txt").unwrap();
+  println!("12a:{}", day_12::a(&day12_input));
+  println!("12b:{}", day_12::b(&day12_input));
   println!("Done");
 }
