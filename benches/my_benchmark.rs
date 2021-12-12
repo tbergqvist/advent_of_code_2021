@@ -39,6 +39,14 @@ pub fn criterion_benchmark(c: &mut Criterion) {
     let input = fs::read_to_string("./inputs/9.txt").unwrap();
     c.bench_function("day9::a", |b| b.iter(|| day_9::a(&input)));
     c.bench_function("day9::b", |b| b.iter(|| day_9::b(&input)));
+    
+    let input = fs::read_to_string("./inputs/10.txt").unwrap();
+    c.bench_function("day10::a", |b| b.iter(|| day_10::a(&input)));
+    c.bench_function("day10::b", |b| b.iter(|| day_10::b(&input)));
+    
+    let input = fs::read_to_string("./inputs/11.txt").unwrap();
+    c.bench_function("day11::a", |b| b.iter(|| day_11::a(&input)));
+    c.bench_function("day11::b", |b| b.iter(|| day_11::b(&input)));
 }
 
 criterion_group!(benches, criterion_benchmark);
