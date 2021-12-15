@@ -1,49 +1,69 @@
 use std::collections::HashMap;
 
-type Bla = char;
-
-type Value = ([Bla;2], Bla);
-
 fn run(input: &str, rounds: u32) -> usize {
-  let mut start: Vec<Bla> = input
+  let first_line = input
     .lines()
     .next()
-    .map(|line| line.chars())
-    .unwrap()
-    .collect();
+    .unwrap();
 
-  let rules: Vec<Value> = input
+  let mut counts: HashMap<&[u8], usize> = first_line
+    .as_bytes()
+    .windows(2)
+    .fold(HashMap::new(), |mut map: HashMap<&[u8], usize>, key| {
+      map
+        .entry(key)
+        .and_modify(|count| *count += 1)
+        .or_insert(1);
+      map
+    });
+
+  let pairs_created: HashMap<&[u8], Vec<String>> = input
     .lines()
     .skip(2)
     .map(|line| {
       let val = line.split_once(" -> ").unwrap();
       let (a, b) = val.0.split_at(1);
-      ([a.parse().unwrap(), b.parse().unwrap()], val.1.parse().unwrap())
+      (val.0.as_bytes(), vec![a.to_string() + val.1, val.1.to_string() + b])
     })
     .collect();
-  
-  for round in 0..rounds {
-    let positions: Vec<(usize, Bla)> = start
-      .windows(2)
-      .enumerate()
-      .filter_map(|(i, window)|
-        rules.iter().find(|(target, _)| target == window)
-        .map(|(_, c)|(i + 1, *c))
-      )
+
+  for _ in 0..rounds {
+    let pairs_to_create: Vec<(&String, usize)> = counts
+      .iter()
+      .flat_map(|(key, count)| pairs_created
+        .get(key)
+        .unwrap()
+        .iter()
+        .map(|s|(s, *count)))
       .collect();
 
-    positions
-      .iter()
-      .enumerate()
-      .for_each(|(i, (position, c))| {
-        start.insert(position + i, *c);
+    counts
+      .values_mut()
+      .for_each(|val|*val = 0);
+
+    pairs_to_create
+      .into_iter()
+      .for_each(|(pair, current_count)| {
+        counts
+          .entry(pair.as_bytes())
+          .and_modify(|count| *count += current_count)
+          .or_insert(current_count);
       });
   }
 
-  let map = start.into_iter().fold(HashMap::new(), |mut map: HashMap<Bla, usize>, c| {
-    map.entry(c).and_modify(|sum| *sum += 1).or_insert(1);
-    map
-  });
+  let mut map: HashMap<&u8, usize> = counts
+    .into_iter()
+    .map(|(key, value)|(&key[1], value))
+    .fold(HashMap::new(), |mut map: HashMap<&u8, usize>, (c, current_count)| {
+      map
+        .entry(c)
+        .and_modify(|count| *count += current_count)
+        .or_insert(current_count);
+      map
+    });
+
+  let start_val = map.get_mut(&first_line.as_bytes()[0]).unwrap();
+  *start_val += 1;
 
   map.values().max().unwrap() - map.values().min().unwrap()
 }
@@ -53,5 +73,5 @@ pub fn a(input: & str) -> usize {
 }
 
 pub fn b(input: &str) -> usize {
-  run(input, 0)
+  run(input, 40)
 }

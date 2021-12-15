@@ -55,6 +55,10 @@ pub fn criterion_benchmark(c: &mut Criterion) {
     let input = fs::read_to_string("./inputs/13.txt").unwrap();
     c.bench_function("day13::a", |b| b.iter(|| day_13::a(&input)));
     c.bench_function("day13::b", |b| b.iter(|| day_13::b(&input)));
+
+    let input = fs::read_to_string("./inputs/14.txt").unwrap();
+    c.bench_function("day14::a", |b| b.iter(|| day_14::a(&input)));
+    c.bench_function("day14::b", |b| b.iter(|| day_14::b(&input)));
 }
 
 criterion_group!(benches, criterion_benchmark);
