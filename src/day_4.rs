@@ -38,7 +38,7 @@ pub fn a(input: &str) -> usize {
     .collect();
 
   let draw_numbers: Vec<usize> = lines[0]
-    .split_terminator(",")
+    .split_terminator(',')
     .map(|s| s.parse().unwrap())
     .collect();
 
@@ -53,7 +53,7 @@ pub fn a(input: &str) -> usize {
             .collect()
         ).collect();
       
-      Board{board: board, won: false}
+      Board{board, won: false}
     })
     .collect();
 
@@ -74,7 +74,7 @@ pub fn b(input: &str) -> usize {
     .collect();
 
   let draw_numbers: Vec<usize> = lines[0]
-    .split_terminator(",")
+    .split_terminator(',')
     .map(|s| s.parse().unwrap())
     .collect();
 
@@ -89,7 +89,7 @@ pub fn b(input: &str) -> usize {
             .collect()
         ).collect();
       
-      Board{board: board, won:false}
+      Board{board, won:false}
     })
     .collect();
 

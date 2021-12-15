@@ -92,7 +92,7 @@ pub fn b(input: &str) -> usize {
       })
       .collect();
 
-    usize::from_str_radix(&clock_str, 10).unwrap()
+      clock_str.parse::<usize>().unwrap()
   })
   .sum()
 }

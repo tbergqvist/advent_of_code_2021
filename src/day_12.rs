@@ -1,7 +1,7 @@
 use rayon::prelude::*;
 use std::collections::HashMap;
 
-fn loop_di_loop<'a>(caves: &'a HashMap<&str, Vec<&str>>, cave_name: &'a str, visited_small_caves: &Vec<&'a str>) -> usize {
+fn loop_di_loop<'a>(caves: &'a HashMap<&str, Vec<&str>>, cave_name: &'a str, visited_small_caves: &[&'a str]) -> usize {
   let small_cave = cave_name.as_bytes()[0].is_ascii_lowercase();
   if small_cave && visited_small_caves.contains(&cave_name) {
     return 0;
@@ -12,7 +12,7 @@ fn loop_di_loop<'a>(caves: &'a HashMap<&str, Vec<&str>>, cave_name: &'a str, vis
   }
 
   if small_cave {
-    let mut visited_small_caves = visited_small_caves.clone();
+    let mut visited_small_caves = visited_small_caves.to_owned();
     visited_small_caves.push(cave_name);
   
     return neighbors.par_iter().map(|n| loop_di_loop(caves, n, &visited_small_caves)).sum();  
@@ -40,7 +40,7 @@ pub fn a(input: &str) -> usize {
   loop_di_loop(&caves, "start", &Vec::new())
 }
 
-fn loop_di_loop2<'a>(caves: &'a HashMap<&str, Vec<&str>>, cave_name: &'a str, visited_small_caves: &Vec<&'a str>, mut small_cave_visited_twice: bool) -> usize {
+fn loop_di_loop2<'a>(caves: &'a HashMap<&str, Vec<&str>>, cave_name: &'a str, visited_small_caves: &[&'a str], mut small_cave_visited_twice: bool) -> usize {
   let small_cave = cave_name.as_bytes()[0].is_ascii_lowercase();
   if small_cave {
     let visit_count = visited_small_caves.iter().filter(|s| **s == cave_name).count();
@@ -56,7 +56,7 @@ fn loop_di_loop2<'a>(caves: &'a HashMap<&str, Vec<&str>>, cave_name: &'a str, vi
   }
 
   if small_cave {
-    let mut visited_small_caves = visited_small_caves.clone();
+    let mut visited_small_caves = visited_small_caves.to_owned();
     visited_small_caves.push(cave_name);
   
     return neighbors.par_iter().map(|n| loop_di_loop2(caves, n, &visited_small_caves, small_cave_visited_twice)).sum();  

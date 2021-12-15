@@ -37,7 +37,7 @@ pub fn a(input: &str) -> usize {
     .lines()
     .skip(1023)
     .map(|line| Fold{ 
-      fold_x: line.bytes().nth(11).unwrap() == b'x', 
+      fold_x: line.as_bytes().get(11).unwrap() == &b'x', 
       position: line.split_at(13).1.parse().unwrap()
     })
     .collect();
@@ -45,7 +45,7 @@ pub fn a(input: &str) -> usize {
   let mut dots: Vec<Position> = input
     .lines()
     .take(1022)
-    .map(|line|line.split_once(",").unwrap())
+    .map(|line|line.split_once(',').unwrap())
     .map(|(x, y)| (x.parse().unwrap(), y.parse().unwrap()))
     .map(|position| {
       folds.iter()
@@ -64,7 +64,7 @@ pub fn b(input: &str) -> usize {
     .lines()
     .skip(1023)
     .map(|line| Fold{ 
-      fold_x: line.bytes().nth(11).unwrap() == b'x', 
+      fold_x: line.as_bytes().get(11).unwrap() == &b'x', 
       position: line.split_at(13).1.parse().unwrap()
     })
     .collect();
@@ -73,7 +73,7 @@ pub fn b(input: &str) -> usize {
   input
     .lines()
     .take(1022)
-    .map(|line|line.split_once(",").unwrap())
+    .map(|line|line.split_once(',').unwrap())
     .map(|(x, y)| (x.parse().unwrap(), y.parse().unwrap()))
     .map(|position| {
       folds.iter()
@@ -87,7 +87,7 @@ pub fn b(input: &str) -> usize {
     for c in row {
       print!("{}", c);
     }
-    println!("");
+    println!();
   }
   0
 }

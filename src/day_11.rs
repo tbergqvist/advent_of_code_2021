@@ -76,5 +76,5 @@ pub fn b(input: &str) -> usize {
       .for_each(|i|*i = 0);
   }
 
-  return 0;
+  0
 }

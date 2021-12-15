@@ -39,7 +39,7 @@ pub fn a(input: &str) -> usize {
     }).unwrap();
   
   let limit: u32 = count / 2;
-  res.iter_mut().for_each(|num| *num = *num / limit);
+  res.iter_mut().for_each(|num| *num /= limit);
 
   let decimal = to_decimal(res);
   decimal * (decimal ^ 0xFFF)

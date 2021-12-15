@@ -32,7 +32,7 @@ impl FromStr for Line {
 pub fn a(input: &str) -> usize {
   let lines: HashMap<(i32, i32), i32> = input
     .lines()
-    .map(|s| Line::from_str(&s).unwrap())
+    .map(|s| Line::from_str(s).unwrap())
     .filter(|line| line.from.0 == line.to.0 || line.from.1 == line.to.1)
     .fold(HashMap::new(), |mut state, line| {
       if line.from.0 == line.to.0 {
@@ -55,7 +55,7 @@ pub fn a(input: &str) -> usize {
 pub fn b(input: &str) -> usize {
   let lines: HashMap<(i32, i32), i32> = input
     .lines()
-    .map(|s| Line::from_str(&s).unwrap())
+    .map(|s| Line::from_str(s).unwrap())
     .fold(HashMap::new(), |mut state, line| {
       if line.from.0 == line.to.0 {
         for i in cmp::min(line.from.1,line.to.1)..=cmp::max(line.from.1,line.to.1) {

@@ -1,4 +1,4 @@
-fn get_point(height_map: &Vec<Vec<i32>>, x: i32, y: i32) -> i32 {
+fn get_point(height_map: &[Vec<i32>], x: i32, y: i32) -> i32 {
   if x >= 100 || y >= 100 || x < 0 || y < 0 {
     10
   } else {
@@ -47,18 +47,21 @@ pub fn b(input: &str) -> usize {
     })
     .collect();
   
-  let low_points: Vec<(i32, i32)> = height_map.iter().enumerate().flat_map(|(y, row)| {
-    let height_map = &height_map;
+  let low_points: Vec<(i32, i32)> = height_map
+    .iter()
+    .enumerate()
+    .flat_map(|(y, row)| {
+      let height_map = &height_map;
 
-    row.iter()
-      .enumerate()
-      .filter(move |(x, point)| {
-        get_point(height_map, *x as i32 - 1, y as i32) > **point &&
-        get_point(height_map, *x as i32 + 1, y as i32) > **point &&
-        get_point(height_map, *x as i32, y as i32 - 1) > **point &&
-        get_point(height_map, *x as i32, y as i32 + 1) > **point
-      })
-      .map(move |(x, _)| (x as i32, y as i32))
+      row.iter()
+        .enumerate()
+        .filter(move |(x, point)| {
+          get_point(height_map, *x as i32 - 1, y as i32) > **point &&
+          get_point(height_map, *x as i32 + 1, y as i32) > **point &&
+          get_point(height_map, *x as i32, y as i32 - 1) > **point &&
+          get_point(height_map, *x as i32, y as i32 + 1) > **point
+        })
+        .map(move |(x, _)| (x as i32, y as i32))
   })
   .collect();
 
