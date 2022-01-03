@@ -6,7 +6,7 @@ fn get_point(height_map: &[Vec<i32>], x: i32, y: i32) -> i32 {
   }
 }
 
-pub fn a(input: &str) -> i32 {
+pub fn a(input: &str) -> i64 {
   let height_map: Vec<Vec<i32>> = input
     .lines()
     .map(|line| {
@@ -21,8 +21,8 @@ pub fn a(input: &str) -> i32 {
         get_point(&height_map, *x as i32, y  as i32 - 1) > **point &&
         get_point(&height_map, *x as i32, y as i32 + 1) > **point
     })
-    .map(|(_, point)| (point + 1) as i32)
-    .sum::<i32>()
+    .map(|(_, point)| (point + 1) as i64)
+    .sum::<i64>()
   }).sum()
 }
 
@@ -39,7 +39,7 @@ pub fn fill(height_map: &mut Vec<Vec<i32>>, (x, y): (i32, i32)) -> usize {
     fill(height_map, (x, y + 1))
 }
 
-pub fn b(input: &str) -> usize {
+pub fn b(input: &str) -> i64 {
   let mut height_map: Vec<Vec<i32>> = input
     .lines()
     .map(|line| {
@@ -71,5 +71,5 @@ pub fn b(input: &str) -> usize {
 
   basins.sort_unstable_by(|a, b| b.cmp(a));
 
-  basins[0] * basins[1] * basins[2]
+  (basins[0] * basins[1] * basins[2]) as i64
 }

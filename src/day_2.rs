@@ -1,9 +1,9 @@
-pub fn a(input: &str) -> i32 {
+pub fn a(input: &str) -> i64 {
   let (x, y) = input
     .lines()
     .map(|s| { 
       let split: Vec<&str> = s.split_whitespace().collect();
-      (split[0].to_string(), split[1].parse::<i32>().unwrap())
+      (split[0].to_string(), split[1].parse::<i64>().unwrap())
     })
     .fold((0, 0), |(x, y), (direction, amount)| {
       match direction.as_str() {
@@ -16,12 +16,12 @@ pub fn a(input: &str) -> i32 {
   x * y
 }
 
-pub fn b(input: &str) -> i32 {
+pub fn b(input: &str) -> i64 {
   let (x, y, _) = input
     .lines()
     .map(|s| { 
       let split: Vec<&str> = s.split_whitespace().collect();
-      (split[0].to_string(), split[1].parse::<i32>().unwrap())
+      (split[0].to_string(), split[1].parse::<i64>().unwrap())
     })
     .fold((0, 0, 0), |(x, y, aim), (direction, amount)| {
       match direction.as_str() {

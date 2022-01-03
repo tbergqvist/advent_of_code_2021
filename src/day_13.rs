@@ -32,7 +32,7 @@ impl Fold {
   }
 }
 
-pub fn a(input: &str) -> usize {
+pub fn a(input: &str) -> i64 {
   let folds: Vec<Fold> = input
     .lines()
     .skip(1023)
@@ -56,10 +56,10 @@ pub fn a(input: &str) -> usize {
 
   dots.sort_unstable();
   dots.dedup();
-  dots.len()
+  dots.len() as i64
 }
 
-pub fn b(input: &str) -> usize {
+pub fn b(input: &str) -> i64 {
   let folds: Vec<Fold> = input
     .lines()
     .skip(1023)

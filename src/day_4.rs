@@ -1,10 +1,10 @@
 struct Board {
-  board: Vec<Vec<usize>>,
+  board: Vec<Vec<i64>>,
   won: bool
 }
 
 impl Board {
-  fn place(&mut self, nr: usize) -> bool {
+  fn place(&mut self, nr: i64) -> bool {
     if self.won {
       return false;
     }
@@ -13,7 +13,7 @@ impl Board {
       .filter(|n| **n == nr)
       .for_each(|n| *n += 1000);
 
-    let row_win = self.board.iter().any(|row| row.iter().sum::<usize>() > 5000);
+    let row_win = self.board.iter().any(|row| row.iter().sum::<i64>() > 5000);
     let column_win = (0..5).into_iter().any(|i| {
       self.board[0][i] + self.board[1][i] + self.board[2][i] + self.board[3][i] + self.board[4][i] > 5000
     });
@@ -22,7 +22,7 @@ impl Board {
     self.won
   }
 
-  fn get_score(&self) -> usize {
+  fn get_score(&self) -> i64 {
     self.board.iter()
       .flat_map(|v| v.iter())
       .filter(|n| **n < 1000)
@@ -30,14 +30,14 @@ impl Board {
   }
 }
 
-pub fn a(input: &str) -> usize {
+pub fn a(input: &str) -> i64 {
   let lines: Vec<String> = input
     .lines()
     .filter(|s| !s.is_empty())
     .map(|s|s.to_string())
     .collect();
 
-  let draw_numbers: Vec<usize> = lines[0]
+  let draw_numbers: Vec<i64> = lines[0]
     .split_terminator(',')
     .map(|s| s.parse().unwrap())
     .collect();
@@ -45,7 +45,7 @@ pub fn a(input: &str) -> usize {
   let mut boards: Vec<Board> = lines[1..]
     .chunks(5)
     .map(|board_rows| {
-      let board: Vec<Vec<usize>> = board_rows.iter()
+      let board: Vec<Vec<i64>> = board_rows.iter()
         .map(|row|
           row
             .split_ascii_whitespace()
@@ -67,13 +67,13 @@ pub fn a(input: &str) -> usize {
   0
 }
 
-pub fn b(input: &str) -> usize {
+pub fn b(input: &str) -> i64 {
   let lines: Vec<&str> = input
     .lines()
     .filter(|s| !s.is_empty())
     .collect();
 
-  let draw_numbers: Vec<usize> = lines[0]
+  let draw_numbers: Vec<i64> = lines[0]
     .split_terminator(',')
     .map(|s| s.parse().unwrap())
     .collect();
@@ -81,7 +81,7 @@ pub fn b(input: &str) -> usize {
   let mut boards: Vec<Board> = lines[1..]
     .chunks(5)
     .map(|board_rows| {
-      let board: Vec<Vec<usize>> = board_rows.iter()
+      let board: Vec<Vec<i64>> = board_rows.iter()
         .map(|row|
           row
             .split_ascii_whitespace()

@@ -1,6 +1,6 @@
 type Position = (i8, i8);
 
-fn add_energy(octopuses: &mut Vec<Vec<i8>>, (x, y): Position) -> usize {
+fn add_energy(octopuses: &mut Vec<Vec<i8>>, (x, y): Position) -> i64 {
   if x < 0 || y < 0 || x >= 10 || y >= 10 {
     return 0;
   }
@@ -23,7 +23,7 @@ fn add_energy(octopuses: &mut Vec<Vec<i8>>, (x, y): Position) -> usize {
   }
 }
 
-pub fn a(input: &str) -> usize {
+pub fn a(input: &str) -> i64 {
   let mut octopuses:Vec<Vec<i8>> = input
     .lines()
     .map(|row| {
@@ -49,7 +49,7 @@ pub fn a(input: &str) -> usize {
   flashes
 }
 
-pub fn b(input: &str) -> usize {
+pub fn b(input: &str) -> i64 {
   let mut octopuses:Vec<Vec<i8>> = input
   .lines()
   .map(|row| {

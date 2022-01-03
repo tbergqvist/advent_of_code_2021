@@ -1,16 +1,16 @@
-pub fn a(input: &str) -> usize {
+pub fn a(input: &str) -> i64 {
   input
     .lines()
     .map(|row| {
       row[61..]
         .split_whitespace()
         .filter(|num|num.len() == 2 || num.len() == 3 || num.len() == 4 || num.len() == 7)
-        .count()
+        .count() as i64
     })
     .sum()
 }
 
-pub fn b(input: &str) -> usize {
+pub fn b(input: &str) -> i64 {
   input
   .lines()
   .map(|row| {
@@ -92,7 +92,7 @@ pub fn b(input: &str) -> usize {
       })
       .collect();
 
-      clock_str.parse::<usize>().unwrap()
+      clock_str.parse::<i64>().unwrap()
   })
   .sum()
 }

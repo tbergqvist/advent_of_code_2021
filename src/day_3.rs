@@ -13,15 +13,15 @@ fn bla(values: Vec<Vec<u32>>, position: usize, invert: bool) -> Vec<u32> {
   bla(values.into_iter().filter(|v| v[position] == bit).collect(), position + 1, invert)
 }
 
-fn to_decimal(vec: Vec<u32>) -> usize {
+fn to_decimal(vec: Vec<u32>) -> i64 {
   let binary_string = vec.iter()
   .map(|num| num.to_string().chars().next().unwrap())
   .collect::<String>();
   
-  usize::from_str_radix(&binary_string, 2).unwrap()
+  i64::from_str_radix(&binary_string, 2).unwrap()
 }
 
-pub fn a(input: &str) -> usize {
+pub fn a(input: &str) -> i64 {
   let lines: Vec<&str> = input
     .lines()
     .collect();
@@ -45,7 +45,7 @@ pub fn a(input: &str) -> usize {
   decimal * (decimal ^ 0xFFF)
 }
 
-pub fn b(input: &str) -> usize {
+pub fn b(input: &str) -> i64 {
   let res: Vec<Vec<u32>> = input
     .lines()
     .map(|s| { 

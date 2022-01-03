@@ -1,6 +1,6 @@
 use pathfinding::prelude::{astar};
 
-pub fn run(input: &str, map_size: i32, tiled: i32) -> i32 {
+pub fn run(input: &str, map_size: i64, tiled: i64) -> i64 {
   let map: Vec<Vec<u8>> = input
     .lines()
     .map(|line| 
@@ -21,7 +21,7 @@ pub fn run(input: &str, map_size: i32, tiled: i32) -> i32 {
         let map_y = y % map_size;
         let risk_mod = x / map_size + y / map_size;
         let risk = (map[map_y as usize][map_x as usize] + risk_mod as u8 - 1) % 9 + 1;
-        ((x, y), risk as i32)
+        ((x, y), risk as i64)
       })
     },
     |&(x, y)| {
@@ -32,10 +32,10 @@ pub fn run(input: &str, map_size: i32, tiled: i32) -> i32 {
   ).unwrap().1
 }
 
-pub fn a(input: &str) -> i32 {
+pub fn a(input: &str) -> i64 {
   run(input, 100, 1)
 }
 
-pub fn b(input: &str) -> i32 {
+pub fn b(input: &str) -> i64 {
   run(input, 100, 5)
 }

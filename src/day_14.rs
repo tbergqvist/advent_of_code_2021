@@ -1,15 +1,15 @@
 use std::collections::HashMap;
 
-fn run(input: &str, rounds: u32) -> usize {
+fn run(input: &str, rounds: u32) -> i64 {
   let first_line = input
     .lines()
     .next()
     .unwrap();
 
-  let mut counts: HashMap<&[u8], usize> = first_line
+  let mut counts: HashMap<&[u8], i64> = first_line
     .as_bytes()
     .windows(2)
-    .fold(HashMap::new(), |mut map: HashMap<&[u8], usize>, key| {
+    .fold(HashMap::new(), |mut map: HashMap<&[u8], i64>, key| {
       map
         .entry(key)
         .and_modify(|count| *count += 1)
@@ -28,7 +28,7 @@ fn run(input: &str, rounds: u32) -> usize {
     .collect();
 
   for _ in 0..rounds {
-    let pairs_to_create: Vec<(&String, usize)> = counts
+    let pairs_to_create: Vec<(&String, i64)> = counts
       .iter()
       .flat_map(|(key, count)| pairs_created
         .get(key)
@@ -51,10 +51,10 @@ fn run(input: &str, rounds: u32) -> usize {
       });
   }
 
-  let mut map: HashMap<&u8, usize> = counts
+  let mut map: HashMap<&u8, i64> = counts
     .into_iter()
     .map(|(key, value)|(&key[1], value))
-    .fold(HashMap::new(), |mut map: HashMap<&u8, usize>, (c, current_count)| {
+    .fold(HashMap::new(), |mut map: HashMap<&u8, i64>, (c, current_count)| {
       map
         .entry(c)
         .and_modify(|count| *count += current_count)
@@ -68,10 +68,10 @@ fn run(input: &str, rounds: u32) -> usize {
   map.values().max().unwrap() - map.values().min().unwrap()
 }
 
-pub fn a(input: & str) -> usize {
+pub fn a(input: & str) -> i64 {
   run(input, 10)
 }
 
-pub fn b(input: &str) -> usize {
+pub fn b(input: &str) -> i64 {
   run(input, 40)
 }

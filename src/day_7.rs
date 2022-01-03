@@ -1,7 +1,7 @@
 use rayon::prelude::*;
 
-pub fn a(input: &str) -> i32 {
-  let mut positions: Vec<i32> = input
+pub fn a(input: &str) -> i64 {
+  let mut positions: Vec<i64> = input
     .lines()
     .next()
     .unwrap()
@@ -14,8 +14,8 @@ pub fn a(input: &str) -> i32 {
   positions.iter().map(|pos| (pos - mid).abs()).sum()
 }
 
-pub fn b(input: &str) -> i32 {
-  let positions: Vec<i32> = input
+pub fn b(input: &str) -> i64 {
+  let positions: Vec<i64> = input
     .lines()
     .next()
     .unwrap()

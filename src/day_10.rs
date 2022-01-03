@@ -1,4 +1,4 @@
-pub fn a(input: &str) -> usize {
+pub fn a(input: &str) -> i64 {
   input.lines().filter_map(|line| {
     let mut stack: Vec<char> = Vec::new();
     
@@ -30,8 +30,8 @@ pub fn a(input: &str) -> usize {
   ).sum() 
 }
 
-pub fn b(input: &str) -> usize {
-  let mut scores: Vec<usize> = input.lines().filter_map(|line| {
+pub fn b(input: &str) -> i64 {
+  let mut scores: Vec<i64> = input.lines().filter_map(|line| {
     let mut stack: Vec<char> = Vec::new();
     
     for c in line.chars() {

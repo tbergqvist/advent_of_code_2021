@@ -3,15 +3,15 @@ use std::str::FromStr;
 use std::cmp;
 
 struct Line {
-  from: (i32, i32),
-  to: (i32, i32)
+  from: (i64, i64),
+  to: (i64, i64)
 }
 
 impl FromStr for Line {
   type Err = String;
 
   fn from_str(string_format: &str) -> Result<Self, Self::Err> {
-    let points: Vec<i32> = string_format
+    let points: Vec<i64> = string_format
       .replace("->", ",")
       .split_terminator(',')
       .map(|str| str
@@ -29,8 +29,8 @@ impl FromStr for Line {
   }
 }
 
-pub fn a(input: &str) -> usize {
-  let lines: HashMap<(i32, i32), i32> = input
+pub fn a(input: &str) -> i64 {
+  let lines: HashMap<(i64, i64), i64> = input
     .lines()
     .map(|s| Line::from_str(s).unwrap())
     .filter(|line| line.from.0 == line.to.0 || line.from.1 == line.to.1)
@@ -49,11 +49,11 @@ pub fn a(input: &str) -> usize {
 
   lines.iter()
     .filter(|(_, count)| **count > 1)
-    .count()
+    .count() as i64
 }
 
-pub fn b(input: &str) -> usize {
-  let lines: HashMap<(i32, i32), i32> = input
+pub fn b(input: &str) -> i64 {
+  let lines: HashMap<(i64, i64), i64> = input
     .lines()
     .map(|s| Line::from_str(s).unwrap())
     .fold(HashMap::new(), |mut state, line| {
@@ -94,5 +94,5 @@ pub fn b(input: &str) -> usize {
 
   lines.iter()
     .filter(|(_, count)| **count > 1)
-    .count()
+    .count() as i64
 }
